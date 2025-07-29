@@ -19,6 +19,5 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 		public const string Id = "Twilio";
 		public const string VoicePropertiesKey = $"{Id}.Voice";
 		public const string SmsPropertiesKey = $"{Id}.Sms";
-		public const string ChannelVerifyPropertyKey = $"{Id}.Verify";
 	}
 }

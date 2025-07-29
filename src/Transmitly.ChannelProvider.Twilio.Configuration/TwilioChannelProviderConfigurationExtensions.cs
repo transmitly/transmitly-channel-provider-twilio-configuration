@@ -13,6 +13,8 @@
 //  limitations under the License.
 
 using Transmitly.Channel.Configuration;
+using Transmitly.Channel.Configuration.Sms;
+using Transmitly.Channel.Configuration.Voice;
 using Transmitly.ChannelProvider.Twilio.Configuration;
 using Transmitly.ChannelProvider.Twilio.Configuration.Sms;
 using Transmitly.ChannelProvider.Twilio.Configuration.Voice;
@@ -40,7 +42,7 @@ namespace Transmitly
 		/// </summary>
 		/// <param name="sms">Sms Channel.</param>
 		/// <returns>Twilio Sms properties.</returns>
-		public static IExtendedSmsChannelProperties Twilio(this IChannel<ISms> sms)
+		public static IExtendedSmsChannelProperties Twilio(this ISmsChannelConfiguration sms)
 		{
 			return TwilioChannelProviderExtendedPropertiesBuilderExtensions.Sms.Adapt(sms);
 		}
@@ -50,7 +52,7 @@ namespace Transmitly
 		/// </summary>
 		/// <param name="voice">Voice Channel.</param>
 		/// <returns>Twilio voice properties.</returns>
-		public static IExtendedVoiceChannelProperties Twilio(this IChannel<IVoice> voice)
+		public static IExtendedVoiceChannelProperties Twilio(this IVoiceChannelConfiguration voice)
 		{
 			return TwilioChannelProviderExtendedPropertiesBuilderExtensions.Voice.Adapt(voice);
 		}

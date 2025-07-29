@@ -16,6 +16,9 @@ using System.Net;
 
 namespace Transmitly.ChannelProvider.Twilio.Configuration
 {
+	/// <summary>
+	/// Options available to configure a Twilio dispatcher.
+	/// </summary>
 	public sealed class TwilioClientOptions
 	{
 		private readonly string _userAgent = GetUserAgent();
