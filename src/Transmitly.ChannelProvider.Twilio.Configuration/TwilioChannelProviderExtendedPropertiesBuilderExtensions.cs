@@ -16,24 +16,23 @@ using System;
 using Transmitly.ChannelProvider.Configuration;
 using Transmitly.ChannelProvider.Twilio.Configuration.Sms;
 using Transmitly.ChannelProvider.Twilio.Configuration.Voice;
-using Transmitly.Util;
 
 namespace Transmitly.ChannelProvider.Twilio.Configuration
 {
 	public static class TwilioChannelProviderExtendedPropertiesBuilderExtensions
 	{
 		private static Type? _smsAdaptorType;
-		internal static IExtendedSmsChannelProperties Sms => Create<IExtendedSmsChannelProperties>(Guard.AgainstNull(_smsAdaptorType));
-
 		private static Type? _voiceAdaptorType;
-		internal static IExtendedVoiceChannelProperties Voice => Create<IExtendedVoiceChannelProperties>(Guard.AgainstNull(_voiceAdaptorType));
-
 		private static Type? _deliveryReportAdaptorType;
-		internal static IDeliveryReportExtendedProperties DeliveryReport => Create<IDeliveryReportExtendedProperties>(Guard.AgainstNull(_deliveryReportAdaptorType));
 
-		private static T Create<T>(Type t)
+		internal static IExtendedSmsChannelProperties Sms => Create<IExtendedSmsChannelProperties, EmptyExtendedSmsChannelProperties>(_smsAdaptorType);
+		internal static IExtendedVoiceChannelProperties Voice => Create<IExtendedVoiceChannelProperties, EmptyExtendedVoiceChannelProperties>(_voiceAdaptorType);
+		internal static IDeliveryReportExtendedProperties DeliveryReport => Create<IDeliveryReportExtendedProperties, EmptyDeliveryReportExtendedProperties>(_deliveryReportAdaptorType);
+
+		private static T Create<T, TDefault>(Type? t)
+			where TDefault : T, new()
 		{
-			return (T)Guard.AgainstNull(Activator.CreateInstance(t));
+			return t is null ? new TDefault() : (T)Activator.CreateInstance(t)!;
 		}
 
 		public static ChannelProviderRegistrationBuilder AddSmsExtendedPropertiesAdaptor<T>(this ChannelProviderRegistrationBuilder builder)
