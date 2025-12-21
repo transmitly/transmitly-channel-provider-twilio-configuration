@@ -1,6 +1,6 @@
 # Transmitly.ChannelProvider.Twilio.Configuration
 
-A shared configuration for the Transmitly Twilio channel provider.
+A shared configuration for the Transmitly™ Twilio channel provider.
 
 ### Getting started
 
