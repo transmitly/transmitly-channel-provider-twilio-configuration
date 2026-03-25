@@ -1,4 +1,4 @@
-﻿// ﻿﻿Copyright (c) Code Impressions, LLC. All Rights Reserved.
+﻿// Copyright (c) Code Impressions, LLC. All Rights Reserved.
 //  
 //  Licensed under the Apache License, Version 2.0 (the "License")
 //  you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 //  limitations under the License.
 
 using System;
+using System.Globalization;
 using Transmitly.Delivery;
 using Transmitly.Util;
 
@@ -45,7 +46,7 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration.Voice
 			AnsweredBy = adaptorContext.GetValue("AnsweredBy");
 			FromState = adaptorContext.GetValue("FromState");
 
-			if (DateTime.TryParse(adaptorContext.GetValue("Timestamp"), out var timestamp))
+			if (DateTimeOffset.TryParse(adaptorContext.GetValue("Timestamp"), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var timestamp))
 				Timestamp = timestamp;
 
 			if (int.TryParse(adaptorContext.GetValue("SequenceNumber"), out var sequenceNumber))

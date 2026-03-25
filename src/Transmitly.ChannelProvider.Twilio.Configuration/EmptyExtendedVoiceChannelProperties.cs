@@ -1,4 +1,4 @@
-﻿// ﻿﻿Copyright (c) Code Impressions, LLC. All Rights Reserved.
+﻿// Copyright (c) Code Impressions, LLC. All Rights Reserved.
 //  
 //  Licensed under the Apache License, Version 2.0 (the "License")
 //  you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 		public HttpMethod? UrlMethod { get;set; }
 		public Func<IDispatchCommunicationContext, Task<string?>>? UrlResolver { get;set; }
 
-		public IExtendedVoiceChannelProperties Adapt(IVoiceChannelConfiguration sms)
+		public IExtendedVoiceChannelProperties Adapt(IVoiceChannelConfiguration voice)
 		{
 			return this;
 		}
@@ -79,7 +79,7 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 			throw new NotImplementedException();
 		}
 
-		public EventDescriptorCollection GetEvents(Attribute[] attributes)
+		public EventDescriptorCollection GetEvents(Attribute[]? attributes)
 		{
 			throw new NotImplementedException();
 		}
@@ -94,12 +94,12 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 			throw new NotImplementedException();
 		}
 
-		public PropertyDescriptorCollection GetProperties(Attribute[] attributes)
+		public PropertyDescriptorCollection GetProperties(Attribute[]? attributes)
 		{
 			throw new NotImplementedException();
 		}
 
-		public object GetPropertyOwner(PropertyDescriptor pd)
+		public object GetPropertyOwner(PropertyDescriptor? pd)
 		{
 			throw new NotImplementedException();
 		}

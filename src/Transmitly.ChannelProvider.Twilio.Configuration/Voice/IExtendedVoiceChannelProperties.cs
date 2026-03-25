@@ -1,4 +1,4 @@
-﻿// ﻿﻿Copyright (c) Code Impressions, LLC. All Rights Reserved.
+﻿// Copyright (c) Code Impressions, LLC. All Rights Reserved.
 //  
 //  Licensed under the Apache License, Version 2.0 (the "License")
 //  you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration.Voice
 {
 	public interface IExtendedVoiceChannelProperties : ICustomTypeDescriptor, ISerializable
 	{
-		IExtendedVoiceChannelProperties Adapt(IVoiceChannelConfiguration sms);
+		IExtendedVoiceChannelProperties Adapt(IVoiceChannelConfiguration voice);
 
 		MachineDetection? MachineDetection { get; set; }
 		Func<string, IVoice, IDispatchCommunicationContext, Task>? OnStoreMessageForRetrievalAsync { get; set; }
