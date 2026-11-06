@@ -28,6 +28,15 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 		public string Edge { get; set; } = "ashburn";
 		public string Region { get; set; } = "us1";
 		public string UserAgent => _userAgent;
+		/// <summary>
+		/// Reject status callbacks whose X-Twilio-Signature doesn't match <see cref="AuthToken"/>. Default: true.
+		/// </summary>
+		public bool ValidateDeliveryReportSignature { get; set; } = true;
+		/// <summary>
+		/// The public base URL Twilio calls (e.g. https://api.example.com), when a reverse proxy means the server
+		/// sees a different scheme/host. Replaces everything before the request path when checking the signature.
+		/// </summary>
+		public string? DeliveryReportBaseUrl { get; set; }
 
 		private static string GetUserAgent()
 		{
