@@ -25,46 +25,43 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration.Voice
 		{
 			Guard.AgainstNull(adaptorContext);
 
-			Called = adaptorContext.GetValue("Called");
-			ToState = adaptorContext.GetValue("ToState");
-			CallerCountry = adaptorContext.GetValue("CallerCountry");
-			CallbackSource = adaptorContext.GetValue("CallbackSource");
-			SipResponseCode = adaptorContext.GetValue("SipResponseCode");
-			CallerState = adaptorContext.GetValue("CallerState");
-			ToZip = adaptorContext.GetValue("ToZip");
-			CallSid = adaptorContext.GetValue("CallSid");
-			CallerZip = adaptorContext.GetValue("CallerZip");
-			ToCountry = adaptorContext.GetValue("ToCountry");
-			CalledZip = adaptorContext.GetValue("CalledZip");
-			CalledCity = adaptorContext.GetValue("CalledCity");
-			CalledCountry = adaptorContext.GetValue("CalledCountry");
-			CallerCity = adaptorContext.GetValue("CallerCity");
-			ToCity = adaptorContext.GetValue("ToCity");
-			FromCountry = adaptorContext.GetValue("FromCountry");
-			CalledState = adaptorContext.GetValue("CalledState");
-			FromZip = adaptorContext.GetValue("FromZip");
-			AnsweredBy = adaptorContext.GetValue("AnsweredBy");
-			FromState = adaptorContext.GetValue("FromState");
+			Called = GetField(adaptorContext, "Called");
+			ToState = GetField(adaptorContext, "ToState");
+			CallerCountry = GetField(adaptorContext, "CallerCountry");
+			CallbackSource = GetField(adaptorContext, "CallbackSource");
+			SipResponseCode = GetField(adaptorContext, "SipResponseCode");
+			CallerState = GetField(adaptorContext, "CallerState");
+			ToZip = GetField(adaptorContext, "ToZip");
+			CallSid = GetField(adaptorContext, "CallSid");
+			CallerZip = GetField(adaptorContext, "CallerZip");
+			ToCountry = GetField(adaptorContext, "ToCountry");
+			CalledZip = GetField(adaptorContext, "CalledZip");
+			CalledCity = GetField(adaptorContext, "CalledCity");
+			CalledCountry = GetField(adaptorContext, "CalledCountry");
+			CallerCity = GetField(adaptorContext, "CallerCity");
+			ToCity = GetField(adaptorContext, "ToCity");
+			FromCountry = GetField(adaptorContext, "FromCountry");
+			CalledState = GetField(adaptorContext, "CalledState");
+			FromZip = GetField(adaptorContext, "FromZip");
+			AnsweredBy = GetField(adaptorContext, "AnsweredBy");
+			FromState = GetField(adaptorContext, "FromState");
+			Caller = GetField(adaptorContext, "Caller");
+			FromCity = GetField(adaptorContext, "FromCity");
 
-			if (DateTimeOffset.TryParse(adaptorContext.GetValue("Timestamp"), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var timestamp))
+			if (DateTimeOffset.TryParse(GetField(adaptorContext, "Timestamp"), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var timestamp))
 				Timestamp = timestamp;
 
-			if (int.TryParse(adaptorContext.GetValue("SequenceNumber"), out var sequenceNumber))
+			if (int.TryParse(GetField(adaptorContext, "SequenceNumber"), out var sequenceNumber))
 				SequenceNumber = sequenceNumber;
 
-			if (int.TryParse(adaptorContext.GetValue("Duration"), out var duration))
+			if (int.TryParse(GetField(adaptorContext, "Duration"), out var duration))
 				Duration = TimeSpan.FromMinutes(duration);
 
-			if (int.TryParse(adaptorContext.GetValue("CallDuration"), out var callDuration))
+			if (int.TryParse(GetField(adaptorContext, "CallDuration"), out var callDuration))
 				CallDuration = TimeSpan.FromSeconds(callDuration);
 
-			var callStatus = EnumUtil.ToEnum<CallStatus>(adaptorContext.GetValue("CallStatus"));
-			if (callStatus != default)
-				CallStatus = callStatus;
-
-			var direction = EnumUtil.ToEnum<Direction>(adaptorContext.GetValue("Direction"));
-			if (direction != default)
-				Direction = direction;
+			CallStatus = EnumUtil.ToEnum<CallStatus>(GetField(adaptorContext, "CallStatus"));
+			Direction = EnumUtil.ToEnum<Direction>(GetField(adaptorContext, "Direction"));
 		}
 
 		public string? Called { get; }

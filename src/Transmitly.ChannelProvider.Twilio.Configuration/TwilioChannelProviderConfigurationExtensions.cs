@@ -37,33 +37,53 @@ namespace Transmitly
 		}
 
 		/// <summary>
-		/// Twilio specific settings for Sms channels.
+		/// Twilio specific settings for an sms channel.
 		/// </summary>
 		/// <param name="sms">Sms Channel.</param>
 		/// <returns>Twilio Sms properties.</returns>
 		public static IExtendedSmsChannelProperties Twilio(this ISmsChannelConfiguration sms)
 		{
-			return TwilioChannelProviderExtendedPropertiesBuilderExtensions.Sms.Adapt(sms);
+			return new ExtendedSmsChannelProperties(Guard.AgainstNull(sms).ExtendedProperties);
 		}
 
 		/// <summary>
-		/// Twilio specific settings for voice channels.
+		/// Twilio specific settings
+		/// </summary>
+		/// <param name="sms">Sms being dispatched.</param>
+		/// <returns>Twilio Sms properties.</returns>
+		public static IExtendedSmsChannelProperties Twilio(this ISms sms)
+		{
+			return new ExtendedSmsChannelProperties(Guard.AgainstNull(sms).ExtendedProperties);
+		}
+
+		/// <summary>
+		/// Twilio specific settings for a voice channel.
 		/// </summary>
 		/// <param name="voice">Voice Channel.</param>
 		/// <returns>Twilio voice properties.</returns>
 		public static IExtendedVoiceChannelProperties Twilio(this IVoiceChannelConfiguration voice)
 		{
-			return TwilioChannelProviderExtendedPropertiesBuilderExtensions.Voice.Adapt(voice);
+			return new ExtendedVoiceChannelProperties(Guard.AgainstNull(voice).ExtendedProperties);
 		}
 
 		/// <summary>
-		/// Twilio specific settings for sms delivery reports.
+		/// Twilio specific settings
+		/// </summary>
+		/// <param name="voice">Voice being dispatched.</param>
+		/// <returns>Twilio voice properties.</returns>
+		public static IExtendedVoiceChannelProperties Twilio(this IVoice voice)
+		{
+			return new ExtendedVoiceChannelProperties(Guard.AgainstNull(voice).ExtendedProperties);
+		}
+
+		/// <summary>
+		/// Twilio specific values for a delivery report.
 		/// </summary>
 		/// <param name="deliveryReport">Delivery Report.</param>
-		/// <returns>Twilio SMS delivery report properties.</returns>
+		/// <returns>Twilio delivery report properties.</returns>
 		public static IDeliveryReportExtendedProperties Twilio(this DeliveryReport deliveryReport)
 		{
-			return TwilioChannelProviderExtendedPropertiesBuilderExtensions.DeliveryReport.Adapt(deliveryReport);
+			return new DeliveryReportExtendedProperties(deliveryReport);
 		}
 	}
 }

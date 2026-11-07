@@ -20,24 +20,22 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 {
 	internal static class EnumUtil
 	{
-		public static T? ToEnum<T>(string? value)
+		/// <summary>
+		/// Finds the member whose <see cref="EnumMemberAttribute"/> value matches; <see langword="null"/> when missing or unknown.
+		/// </summary>
+		public static T? ToEnum<T>(string? value) where T : struct, Enum
 		{
 			if (string.IsNullOrWhiteSpace(value))
-				return default;
+				return null;
 
-			var type = typeof(T);
-			if (type.GetTypeInfo().IsEnum)
+			foreach (var name in Enum.GetNames(typeof(T)))
 			{
-				foreach (var name in Enum.GetNames(type))
-				{
-					var attr = type.GetRuntimeField(name).GetCustomAttribute<EnumMemberAttribute>(true);
-					if (attr != null && attr.Value == value)
-						return (T)Enum.Parse(type, name);
-				}
-
-				return default;
+				var attr = typeof(T).GetRuntimeField(name)?.GetCustomAttribute<EnumMemberAttribute>(true);
+				if (attr != null && attr.Value == value)
+					return (T)Enum.Parse(typeof(T), name);
 			}
-			throw new InvalidOperationException("Not Enum");
+
+			return null;
 		}
 	}
 }

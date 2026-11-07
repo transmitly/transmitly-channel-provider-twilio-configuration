@@ -13,18 +13,16 @@
 //  limitations under the License.
 
 using System;
-using System.ComponentModel;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Transmitly.Channel.Configuration.Voice;
 
 namespace Transmitly.ChannelProvider.Twilio.Configuration.Voice
 {
-	public interface IExtendedVoiceChannelProperties : ICustomTypeDescriptor, ISerializable
+	/// <summary>
+	/// Twilio specific properties for the voice channel.
+	/// </summary>
+	public interface IExtendedVoiceChannelProperties
 	{
-		IExtendedVoiceChannelProperties Adapt(IVoiceChannelConfiguration voice);
-
 		MachineDetection? MachineDetection { get; set; }
 		Func<string, IVoice, IDispatchCommunicationContext, Task>? OnStoreMessageForRetrievalAsync { get; set; }
 		string? StatusCallbackMethod { get; set; }

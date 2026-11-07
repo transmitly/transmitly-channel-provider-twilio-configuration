@@ -23,13 +23,13 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 		{
 			Guard.AgainstNull(adaptorContext);
 
-			AccountSid = adaptorContext.GetValue("AccountSid");
-			ApiVersion = adaptorContext.GetValue("ApiVersion");
-			To = adaptorContext.GetValue("To");
-			From = adaptorContext.GetValue("From");
-			Signature = adaptorContext.GetValue("x-twilio-signature");
-			IdempotencyId = adaptorContext.GetValue("i-twilio-idempotency-token");
-			HomeRegion = adaptorContext.GetValue("x-home-region");
+			AccountSid = GetField(adaptorContext, "AccountSid");
+			ApiVersion = GetField(adaptorContext, "ApiVersion");
+			To = GetField(adaptorContext, "To");
+			From = GetField(adaptorContext, "From");
+			Signature = adaptorContext.GetHeaderValue("x-twilio-signature");
+			IdempotencyId = adaptorContext.GetHeaderValue("i-twilio-idempotency-token");
+			HomeRegion = adaptorContext.GetHeaderValue("x-home-region");
 		}
 
 		public string? AccountSid { get; protected set; }
@@ -39,5 +39,9 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration
 		public string? IdempotencyId { get; protected set; }
 		public string? Signature { get; protected set; }
 		public string? HomeRegion { get; protected set; }
+
+		// Twilio posts callback fields as a form, or in the query when the callback method is GET
+		internal static string? GetField(IRequestAdaptorContext adaptorContext, string key) =>
+			adaptorContext.GetFormValue(key) ?? adaptorContext.GetQueryValue(key);
 	}
 }

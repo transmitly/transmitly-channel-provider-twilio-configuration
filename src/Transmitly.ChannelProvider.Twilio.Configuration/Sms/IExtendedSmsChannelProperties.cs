@@ -14,7 +14,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Transmitly.Channel.Configuration.Sms;
 
 namespace Transmitly.ChannelProvider.Twilio.Configuration.Sms
 {
@@ -23,8 +22,6 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration.Sms
 	/// </summary>
 	public interface IExtendedSmsChannelProperties
 	{
-		IExtendedSmsChannelProperties Adapt(ISmsChannelConfiguration sms);
-
 		/// <summary>
 		/// The SID of the Messaging Service you want to associate with the message.
 		/// <seealso href="https://www.twilio.com/docs/messaging/services">Documentation</seealso>

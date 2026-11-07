@@ -14,15 +14,21 @@
 
 using Transmitly.ChannelProvider.Twilio.Configuration.Sms;
 using Transmitly.ChannelProvider.Twilio.Configuration.Voice;
-using Transmitly.Delivery;
 
-namespace Transmitly
+namespace Transmitly.ChannelProvider.Twilio.Configuration
 {
+	/// <summary>
+	/// Twilio specific values for a delivery report.
+	/// </summary>
 	public interface IDeliveryReportExtendedProperties
 	{
-		IDeliveryReportExtendedProperties Adapt(DeliveryReport report);
-
+		/// <summary>
+		/// Twilio values for an SMS delivery report.
+		/// </summary>
 		IExtendedSmsDeliveryReportProperties Sms { get; }
+		/// <summary>
+		/// Twilio values for a voice delivery report.
+		/// </summary>
 		IExtendedVoiceDeliveryReportProperties Voice { get; }
 	}
 }

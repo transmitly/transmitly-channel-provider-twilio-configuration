@@ -22,17 +22,12 @@ namespace Transmitly.ChannelProvider.Twilio.Configuration.Sms
 		{
 			Guard.AgainstNull(adaptorContext);
 
-			SmsSid = adaptorContext.GetValue("SmsSid");
-			MessageSid = adaptorContext.GetValue("MessageSid");
+			SmsSid = GetField(adaptorContext, "SmsSid");
+			MessageSid = GetField(adaptorContext, "MessageSid");
 
-			var messageStatus = EnumUtil.ToEnum<SmsStatus>(adaptorContext.GetValue("MessageStatus"));
-			if (messageStatus != default)
-				MessageStatus = messageStatus;
-
-			var smsStatus = EnumUtil.ToEnum<SmsStatus>(adaptorContext.GetValue("SmsStatus"));
-			if (smsStatus != default)
-				SmsStatus = smsStatus;
-			ErrorCode = adaptorContext.GetValue("ErrorCode");
+			MessageStatus = EnumUtil.ToEnum<SmsStatus>(GetField(adaptorContext, "MessageStatus"));
+			SmsStatus = EnumUtil.ToEnum<SmsStatus>(GetField(adaptorContext, "SmsStatus"));
+			ErrorCode = GetField(adaptorContext, "ErrorCode");
 		}
 
 		public SmsStatus? MessageStatus { get; }
